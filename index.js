@@ -1,36 +1,41 @@
-// An optimized version of Bubble Sort
-function shellSort(arr) {
-  var len = arr.length,
-    temp,
-    gap = 1;
+function mergeSort(arr) {
+  const resArr = [];
+  const len = arr.length;
 
-  while (gap < len / 3) {
-    //动态定义间隔序列
-    gap = gap * 3;
+  if (len <= 1) {
+    return arr;
   }
 
-  // 动态缩小 gap
-  for (; gap > 0; gap = Math.floor(gap / 3)) {
-    // 开始插入排序的锚点定义
-    for (let j = gap; j < len; j++) {
-      let k = j;
-      temp = arr[j];
-      // 排序
-      for (; k - gap >= 0 && arr[k - gap] > temp; k = k - gap) {
-        arr[k] = arr[k - gap];
-      }
-      arr[k] = temp;
-    }
+  const seg = Math.ceil(len / 2);
+
+  // 获取已经排好序的两个数组
+  const arr1 = mergeSort(arr.slice(0, seg));
+  const arr2 = mergeSort(arr.slice(seg));
+  const arr1Len = arr1.length;
+  const arr2Len = arr2.length;
+
+  let cur = 0,
+    arr1s = 0,
+    arr2s = 0;
+
+  // 两个数组合并
+  while (arr1s < arr1Len && arr2s < arr2Len) {
+    resArr[cur++] = arr1[arr1s] > arr2[arr2s] ? arr2[arr2s++] : arr1[arr1s++];
   }
 
-  return arr;
+  while (arr1s < arr1Len) {
+    resArr[cur++] = arr1[arr1s++];
+  }
+
+  while (arr2s < arr2Len) {
+    resArr[cur++] = arr2[arr2s++];
+  }
+
+  return resArr;
 }
 
-// Driver program to test above functions
-// var arr = [2, 1];
 var arr = [4, 5, 6, 7, 3, 2, 1, 8, 9, 0];
-var n = 7;
-
-shellSort(arr);
-
-console.log(arr);
+console.time();
+const res = mergeSort(arr);
+console.timeEnd();
+console.log(res);

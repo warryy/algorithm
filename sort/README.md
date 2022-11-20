@@ -3,3 +3,4 @@
 - [selection sort(选择排序)](./selection-sort/)
 - [insert sort(插入排序)](./insert-sort/)
 - [shell sort(希尔排序)](./shell-sort/)
+- [merge sort(归并排序)](./merge-sort/)
