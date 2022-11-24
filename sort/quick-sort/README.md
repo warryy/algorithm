@@ -13,6 +13,7 @@
 > 总结: 快排是在冒泡的基础上改进而来的, 冒泡算法每次只能交换相邻两个元素, 而快排则可以跨越元素进行交换, 所以交换次数会减少
 
 ## 算法
+1. 递归实现
 ```javascript
 function quickSort(arr, left, right) {
   const len = arr.length
@@ -47,6 +48,49 @@ function quickSort(arr, left, right) {
 
   if (j < right) {
     quickSort(arr, j + 1, right)
+  }
+}
+```
+
+2. 迭代实现
+> 用栈将每次需要排序的数组下标标记存下来, 然后通过清空栈来进行子数组的排序
+```javascript
+function quickSortIteration(arr, left, right) {
+  left = left ?? 0;
+  right = right ?? arr.length - 1;
+
+  const stack = [];
+  stack.push([left, right]);
+
+  while (stack.length) {
+    let [_left, _right] = stack.shift();
+    let l = _left,
+      r = _right;
+      
+    const n = arr[l];
+    
+    while (l < r) {
+      if (arr[l] > arr[r]) {
+        swapArr(arr, l, r);
+        if (arr[r] === n) {
+          l++;
+        } else {
+          r--;
+        }
+      } else {
+        r--;
+      }
+    }
+
+    // 如果左边剩余数组长度 > 1
+    if (l - 1 > _left) {
+      stack.push([_left, l - 1]);
+    }
+
+    // 如果右边剩余数组长度 > 1;
+    if (_right > l + 1) {
+      stack.push([l + 1, _right]);
+    }
   }
 }
 ```

@@ -1,30 +1,48 @@
+function swapArr(arr, i, j) {
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
 
-function countingSort(arr) {
-  let max = 0
-  const len = arr.length
-  for (let i = 0; i < len; i++) {
-    if (arr[i] > max) {
-      max = arr[i]
+function quickSortIteration(arr, left, right) {
+  left = left ?? 0;
+  right = right ?? arr.length - 1;
+
+  const stack = [];
+  stack.push([left, right]);
+
+  while (stack.length) {
+    let [_left, _right] = stack.shift();
+    let l = _left,
+      r = _right;
+    const n = arr[l];
+    while (l < r) {
+      if (arr[l] > arr[r]) {
+        swapArr(arr, l, r);
+        if (arr[r] === n) {
+          l++;
+        } else {
+          r--;
+        }
+      } else {
+        r--;
+      }
+    }
+
+    // 如果左边剩余数组长度 > 1
+    if (l - 1 > _left) {
+      stack.push([_left, l - 1]);
+    }
+
+    // 如果右边剩余数组长度 > 1;
+    if (_right > l + 1) {
+      stack.push([l + 1, _right]);
     }
   }
-  const countingArr = []
-
-  for (let i = 0; i < len; i++) {
-    countingArr[arr[i]] = countingArr[arr[i]] ? countingArr[arr[i]] + 1 : 1
-  }
-
-  const resArr = []
-  for (let i = 0; i <= max; i++) {
-    while (countingArr[i] > 0) {
-      resArr.push(i)
-      countingArr[i] --
-    }
-  } 
-  return resArr
 }
 
 var arr = [4, 5, 6, 7, 3, 5, 2, 1, 8, 9, 0];
 console.time();
-const res = countingSort(arr);
+const res = quickSortIteration(arr);
 console.timeEnd();
-console.log(res);
+console.log(arr);
