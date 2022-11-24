@@ -7,3 +7,5 @@
 6. [quick sort(快速排序)](./quick-sort/)
 7. [heap sort(堆排序)](./heap-sort/)
 8. [counting sort(计数排序)](./counting-sort/)
+9. [bucket sort(桶排序)](./bucket-sort/)
+10. [radix sort(基数排序)](./radix-sort/)

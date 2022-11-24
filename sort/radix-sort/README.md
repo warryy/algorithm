@@ -1,9 +1,16 @@
-function swapArr(arr, i, j) {
-  const temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
-}
+# radix sort 
 
+## 知识点: `sort`, `radix sort`
+
+## 简介
+> 一句话: 以数组中数值大小的个位数为 bucket 下标, 将数据放入对应的 bucket 中, 然后再进位到十百千位...依次进行排序
+> 
+> (LSD[Least Significant Digital]最低有效位数): 如上所述
+>
+> (MSD[Most Significant Digital]最大有效位数): todo
+
+## 算法
+```javascript
 function radixSort(arr) {
   /** 是否已经排序到数据最高位数 */
   let flag = false;
@@ -36,9 +43,20 @@ function radixSort(arr) {
     }
   }
 }
+```
 
-var arr = [4, 5, 6, 7, 3, 5, 2, 1, 8, 9, 0];
-console.time();
-const res = radixSort(arr);
-console.timeEnd();
-console.log(arr);
+## 复杂度
+### 时间复杂度 `O(k * n)`
+k 为数组中南数据最大的位数
+
+### 空间复杂度 `O(k * n)`
+k 为数组中南数据最大的位数
+
+## 最快情况
+`O(k * n)`
+
+## 最慢情况
+`O(k * n)`
+
+## 稳定性
+稳定
