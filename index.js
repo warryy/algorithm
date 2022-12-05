@@ -18,14 +18,14 @@ function radixSort(arr) {
     flag = true;
     for (let i = 0; i < len; i++) {
       const r = arr[i] / base;
-      if (r >= 10) {
+      if (r >= 1) {
         flag = false;
         base *= 10;
       }
       const floorR = Math.floor(r);
       const diff = r - floorR;
       const radix = Math.floor(diff * 10);
-      bucket[radix] ? bucket[radix].push(arr[i]) : bucket[radix] = [arr[i]];
+      bucket[radix] ? bucket[radix].push(arr[i]) : (bucket[radix] = [arr[i]]);
     }
 
     let j = 0;
@@ -37,7 +37,10 @@ function radixSort(arr) {
   }
 }
 
-var arr = [4, 5, 6, 7, 3, 5, 2, 1, 8, 9, 0];
+
+// var arr = [4, 5, 6, 7, 3, 5, 2, 1, 8, 9, 0];
+// var arr = [4, 5, 6, 7, 3, 5, 2, 1, 8, 9, 0, 11, 22, 23];
+// var arr = [222, 223];
 console.time();
 const res = radixSort(arr);
 console.timeEnd();

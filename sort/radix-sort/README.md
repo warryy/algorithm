@@ -10,6 +10,7 @@
 > (MSD[Most Significant Digital]最大有效位数): todo
 
 ## 算法
+- LSD
 ```javascript
 function radixSort(arr) {
   /** 是否已经排序到数据最高位数 */
@@ -25,14 +26,14 @@ function radixSort(arr) {
     flag = true;
     for (let i = 0; i < len; i++) {
       const r = arr[i] / base;
-      if (r >= 10) {
+      if (r >= 1) {
         flag = false;
         base *= 10;
       }
       const floorR = Math.floor(r);
       const diff = r - floorR;
       const radix = Math.floor(diff * 10);
-      bucket[radix] ? bucket[radix].push(arr[i]) : bucket[radix] = [arr[i]];
+      bucket[radix] ? bucket[radix].push(arr[i]) : (bucket[radix] = [arr[i]]);
     }
 
     let j = 0;
@@ -43,6 +44,7 @@ function radixSort(arr) {
     }
   }
 }
+
 ```
 
 ## 复杂度
@@ -50,7 +52,7 @@ function radixSort(arr) {
 k 为数组中南数据最大的位数
 
 ### 空间复杂度 `O(k * n)`
-k 为数组中南数据最大的位数
+k 为数组中数据最大的位数
 
 ## 最快情况
 `O(k * n)`
