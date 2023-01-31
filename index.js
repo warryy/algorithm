@@ -4,6 +4,22 @@ function swapArr(arr, i, j) {
   arr[j] = temp;
 }
 
+/**
+ * 分割函数, 返回当前基准值所在的下标
+ */
+function partition(arr, left, right) {
+  let base = left, index = left + 1
+  for (let cur = index; cur <= right; cur ++) {
+    if (arr[cur] < arr[base]) {
+      swapArr(arr, index, cur)
+      index++
+    }
+  }
+
+  swapArr(arr, base, index - 1)
+  return index -1
+}
+
 function quickSort(arr, left, right) {
   const len = arr.length;
   // 通过 left, right 的数组下标, 来实现数组的切分, 用于递归
@@ -12,44 +28,66 @@ function quickSort(arr, left, right) {
     right = len - 1;
   }
 
-  let i = left,
-    j = right;
-  let temp;
-  const n = arr[i];
+  const index = partition(arr, left, right)
+  if (left < index - 1) {
+    quickSort(arr, left, index - 1)
+  }
+  if (index + 1 < right) {
+    quickSort(arr, index + 1, right)
+  }
+}
 
-  while (i < j) {
-    if (arr[i] > arr[j]) {
-      temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-      if (arr[j] == n) {
-        i++;
+function quickSortIteration(arr, left, right) {
+  left = left ?? 0;
+  right = right ?? arr.length - 1;
+
+  const stack = [];
+  stack.push([left, right]);
+
+  while (stack.length) {
+    let [_left, _right] = stack.shift();
+    let l = _left,
+      r = _right;
+      
+    const n = arr[l];
+    
+    while (l < r) {
+      if (arr[l] > arr[r]) {
+        swapArr(arr, l, r);
+        if (arr[r] === n) {
+          l++;
+        } else {
+          r--;
+        }
       } else {
-        j--;
-      }
-    } else {
-      if (arr[i] === n) {
-        j--;
-      } else {
-        i++;
+        if (arr[l] === n) {
+          r--
+        } else {
+          l++
+        }
       }
     }
-  }
-  console.log([...arr])
-  if (i > left) {
-    quickSort(arr, left, i - 1)
-  }
 
-  if (i < right) {
-    quickSort(arr, i + 1, right)
+    // 如果左边剩余数组长度 > 1
+    if (l - 1 > _left) {
+      stack.push([_left, l - 1]);
+    }
+
+    // 如果右边剩余数组长度 > 1;
+    if (_right > l + 1) {
+      stack.push([l + 1, _right]);
+    }
   }
 }
 
 var arr = [4, 5, 6, 7, 3, 5, 2, 1, 8, 9, 0];
 // var arr = [3, 2, 5, 1, 4];
 
-console.log(arr);
+// console.log(arr);
 console.time();
-quickSort(arr);
+quickSortIteration(arr);
 console.timeEnd();
+// console.time();
+// quickSort2(arr);
+// console.timeEnd();
 console.log(arr);
