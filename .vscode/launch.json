@@ -7,9 +7,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "二叉堆调试",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/index.js"
+      "program": "${workspaceFolder}/leetcode/分类别刷/二叉堆/index.js"
     }
   ]
 }

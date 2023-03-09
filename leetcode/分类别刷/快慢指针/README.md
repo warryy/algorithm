@@ -5,6 +5,7 @@
 # 题型
 - [26. 删除有序数组的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
 - [83. 删除链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
+- [19. 删除链表的倒数第 N 个结点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
 
 # 衍生: 滑动窗口
 将快慢指针之间的区域成为窗口, 一般为左开右闭 `[left, right)`
