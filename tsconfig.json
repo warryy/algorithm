@@ -1,5 +1,8 @@
 {
-    "exclude": [
-        "**/*.js"
-    ]
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.js"]
 }

@@ -7,9 +7,17 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "二叉堆调试",
+      "name": "ts调试",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/leetcode/分类别刷/二叉堆/index.js"
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "program": "${workspaceFolder}/src/index.ts",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js", "!**/node_modules/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "js调试",
+      "program": "${workspaceFolder}/src/js.js"
     }
   ]
 }
