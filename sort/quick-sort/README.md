@@ -78,7 +78,7 @@ function partition(arr, left, right) {
   }
 
   swapArr(arr, base, index - 1)
-  return index -1
+  return index - 1
 }
 
 function quickSort(arr, left, right) {
