@@ -1,85 +1,30 @@
-function swap(arr: number[], left: number, right: number) {
-  const temp = arr[left];
-  arr[left] = arr[right];
-  arr[right] = temp;
-}
-
-function partation(arr: number[], left: number, right: number): number {
-  let l = left,
-    r = right;
-  let pivot = arr[l];
-
-  while (l < r) {
-    while (l < r && arr[r] >= pivot) {
-      --r;
+function searchMatrix(matrix: number[][], target: number): boolean {
+  let min = 0,
+    max = Math.min(matrix.length - 1, matrix[0].length - 1);
+  while (min <= max && matrix[min][min] <= target) {
+    if (matrix[min][min] === target) {
+      return true;
     }
-    arr[l] = arr[r];
-    while (l < r && arr[l] < pivot) {
-      ++l;
-    }
-    arr[r] = arr[l];
+    ++min;
   }
-
-  arr[l] = pivot;
-  return l;
-}
-
-function quickSort(arr: number[], left?: number, right?: number) {
-  let l = left ?? 0;
-  let r = right ?? arr.length - 1;
-  if (l < r) {
-    const partationIdx = partation(arr, l, r);
-    quickSort(arr, l, partationIdx - 1);
-    quickSort(arr, partationIdx + 1, r);
-  }
-}
-
-function threeSum(nums: number[]): number[][] {
-  quickSort(nums)
-  const res: number[][] = [];
-
-  for (let i = 0; i < nums.length - 2; ++i) {
-    if (nums[i] > 0) {
-      return res;
-    }
-
-    if (nums[i] === nums[i - 1]) {
-      continue;
-    }
-
-    let l = i + 1,
-      r = nums.length - 1;
-    while (l < r) {
-      if (nums[i] + nums[l] + nums[r] === 0) {
-        res.push([nums[i], nums[l], nums[r]]);
-        while (l < r && nums[r] === nums[r - 1]) {
-          --r;
-        }
-        --r;
-        while (l < r && nums[l] === nums[l + 1]) {
-          ++l;
-        }
-        ++l;
-        continue;
-      }
-
-      if (nums[i] + nums[l] + nums[r] > 0) {
-        while (l < r && nums[r] === nums[r - 1]) {
-          --r;
-        }
-        --r;
-        continue;
-      }
-
-      if (nums[i] + nums[l] + nums[r] < 0) {
-        while (l < r && nums[l] === nums[l + 1]) {
-          ++l;
-        }
-        ++l;
+  max = min;
+  --min;
+  for (let i = 0; i <= min; ++i) {
+    for (let j = max; j < matrix[0].length; ++j) {
+      if (matrix[i][j] === target) {
+        return true;
       }
     }
   }
-  return res;
+
+  for (let i = max; i < matrix.length; ++i) {
+    for (let j = 0; j <= min; ++j) {
+      if (matrix[i][j] === target) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
-console.log(JSON.stringify(threeSum([-1, 0, 1, 2, -1, -4])));
+console.log(searchMatrix([[5], [6]], 6));
