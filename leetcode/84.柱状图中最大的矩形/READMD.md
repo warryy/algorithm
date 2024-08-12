@@ -1,3 +1,14 @@
+# largest-rectangle-in-histogram
+
+## 知识点: `Stack Array`
+
+## 难度: `Hard`
+
+## 题目:
+[https://leetcode.com/problems/largest-rectangle-in-histogram/](https://leetcode.com/problems/largest-rectangle-in-histogram/)
+
+## 解法:
+```typescript
 /**
  * 该方法是单调栈方法, 但是本质是暴力求解方法的优化(所以要先了解暴力求解)
  * 暴力方法即遍历每个柱子, 以此柱子当做矩形的高
@@ -74,5 +85,4 @@ function largestRectangleArea(heights: number[]): number {
 
   return maxRes;
 }
-
-console.log(largestRectangleArea([2, 1, 5, 6, 2, 3]));
+```
